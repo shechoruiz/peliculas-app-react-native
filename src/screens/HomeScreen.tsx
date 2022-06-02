@@ -1,5 +1,12 @@
 import React from 'react';
-import {ActivityIndicator, Dimensions, View} from 'react-native';
+import {
+  ActivityIndicator,
+  Dimensions,
+  FlatList,
+  ScrollView,
+  Text,
+  View,
+} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import Carousel from 'react-native-snap-carousel';
 import MoviePoster from '../components/MoviePoster';
@@ -20,17 +27,33 @@ const HomeScreen = () => {
   }
 
   return (
-    <View style={{marginTop: top}}>
-      {/* <MoviePoster movie={moviesEmission[0]} /> */}
-      <View style={{height: 440}}>
-        <Carousel
-          data={moviesEmission}
-          renderItem={({item}: any) => <MoviePoster movie={item} />}
-          sliderWidth={windowWidth}
-          itemWidth={300}
-        />
+    <ScrollView>
+      <View style={{marginTop: top}}>
+        {/* Carousel principal */}
+        <View style={{height: 440}}>
+          <Carousel
+            data={moviesEmission}
+            renderItem={({item}: any) => <MoviePoster movie={item} />}
+            sliderWidth={windowWidth}
+            itemWidth={300}
+          />
+        </View>
+
+        {/* Peliculas populares */}
+        <View style={{backgroundColor: 'red', height: 260}}>
+          <Text style={{fontSize: 30, fontWeight: 'bold'}}>Populares</Text>
+          <FlatList
+            data={moviesEmission}
+            renderItem={({item}: any) => (
+              <MoviePoster movie={item} height={200} width={140} />
+            )}
+            keyExtractor={item => item.id.toString()}
+            horizontal={true}
+            showsHorizontalScrollIndicator={false}
+          />
+        </View>
       </View>
-    </View>
+    </ScrollView>
   );
 };
 
