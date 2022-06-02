@@ -21,20 +21,20 @@ const MoviePoster = ({movie}: Props) => {
 
 const styles = StyleSheet.create({
   container: {
-    width: 200,
-    height: 400,
+    width: 300,
+    height: 420,
   },
   imageContainer: {
     flex: 1,
-    sshadowColor: '#000',
+    shadowColor: '#000',
     shadowOffset: {
       width: 0,
-      height: 6,
+      height: 8,
     },
-    shadowOpacity: 0.37,
-    shadowRadius: 7.49,
+    shadowOpacity: 0.44,
+    shadowRadius: 10.32,
 
-    elevation: 12,
+    elevation: 16,
   },
   image: {
     flex: 1,
