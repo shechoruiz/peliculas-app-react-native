@@ -1,15 +1,21 @@
 import {useEffect, useState} from 'react';
 import movieDB from '../api/movieDB';
-import {Movie, MovieDBNowPlaying} from '../interfaces/movieInterface';
+import {Movie, MovieDBMoviesResponse} from '../interfaces/movieInterface';
 
 const useMovies = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [moviesEmission, setMoviesEmission] = useState<Movie[]>([]);
+  const [moviesPopular, setMoviesPopular] = useState<Movie[]>([]);
 
   const getMovies = async () => {
-    const resp = await movieDB.get<MovieDBNowPlaying>('/now_playing');
-    const peliculas = resp.data.results;
+    const respNowPlaying = await movieDB.get<MovieDBMoviesResponse>(
+      '/now_playing',
+    );
+    const respPopular = await movieDB.get<MovieDBMoviesResponse>('/popular');
+    const peliculas = respNowPlaying.data.results;
+    const populares = respPopular.data.results;
     setMoviesEmission(peliculas);
+    setMoviesPopular(populares);
     setIsLoading(false);
   };
 
@@ -19,6 +25,7 @@ const useMovies = () => {
 
   return {
     moviesEmission,
+    moviesPopular,
     isLoading,
   };
 };
