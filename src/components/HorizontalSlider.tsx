@@ -2,7 +2,7 @@ import React from 'react';
 import {FlatList, Text, View} from 'react-native';
 import {Movie} from '../interfaces/movieInterface';
 import MoviePoster from './MoviePoster';
-
+import {StyleSheet} from 'react-native';
 interface Props {
   title?: string;
   movies: Movie[];
@@ -10,12 +10,8 @@ interface Props {
 
 const HorizontalSlider = ({title, movies}: Props) => {
   return (
-    <View style={{height: title ? 260 : 220}}>
-      {title && (
-        <Text style={{fontSize: 30, fontWeight: 'bold', marginLeft: 10}}>
-          {title}
-        </Text>
-      )}
+    <View style={title ? styles.heightSlider1 : styles.heightSlider2}>
+      {title && <Text style={styles.titleSlider}>{title}</Text>}
       <FlatList
         data={movies}
         renderItem={({item}: any) => (
@@ -28,5 +24,19 @@ const HorizontalSlider = ({title, movies}: Props) => {
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  titleSlider: {
+    fontSize: 30,
+    fontWeight: 'bold',
+    marginLeft: 10,
+  },
+  heightSlider1: {
+    height: 260,
+  },
+  heightSlider2: {
+    height: 220,
+  },
+});
 
 export default HorizontalSlider;

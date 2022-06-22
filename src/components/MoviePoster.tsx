@@ -17,8 +17,10 @@ const MoviePoster = ({movie, height = 420, width = 300}: Props) => {
   return (
     <TouchableOpacity
       activeOpacity={0.8}
-      onPress={() => navigation.navigate('DetailScreen', movie)}
-      style={{width, height, marginHorizontal: 8}}>
+      onPress={() =>
+        navigation.navigate('DetailScreen' as never, movie as never)
+      }
+      style={{width, height, ...styles.poster}}>
       <View style={styles.imageContainer}>
         <Image source={{uri}} style={styles.image} />
       </View>
@@ -27,6 +29,9 @@ const MoviePoster = ({movie, height = 420, width = 300}: Props) => {
 };
 
 const styles = StyleSheet.create({
+  poster: {
+    marginHorizontal: 8,
+  },
   imageContainer: {
     flex: 1,
     shadowColor: '#000',

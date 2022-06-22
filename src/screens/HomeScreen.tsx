@@ -5,6 +5,7 @@ import Carousel from 'react-native-snap-carousel';
 import MoviePoster from '../components/MoviePoster';
 import useMovies from '../hooks/useMovies';
 import HorizontalSlider from '../components/HorizontalSlider';
+import {StyleSheet} from 'react-native';
 
 const {width: windowWidth} = Dimensions.get('window');
 
@@ -14,7 +15,7 @@ const HomeScreen = () => {
 
   if (isLoading) {
     return (
-      <View style={{flex: 1, justifyContent: 'center', alignContent: 'center'}}>
+      <View style={styles.loadingIndicator}>
         <ActivityIndicator color="red" size={40} />
       </View>
     );
@@ -24,7 +25,7 @@ const HomeScreen = () => {
     <ScrollView>
       <View style={{marginTop: top}}>
         {/* Carousel principal */}
-        <View style={{height: 440}}>
+        <View style={styles.containerCarousel}>
           <Carousel
             data={nowPlaying}
             renderItem={({item}: any) => <MoviePoster movie={item} />}
@@ -42,5 +43,16 @@ const HomeScreen = () => {
     </ScrollView>
   );
 };
+
+const styles = StyleSheet.create({
+  loadingIndicator: {
+    flex: 1,
+    justifyContent: 'center',
+    alignContent: 'center',
+  },
+  containerCarousel: {
+    height: 440,
+  },
+});
 
 export default HomeScreen;
